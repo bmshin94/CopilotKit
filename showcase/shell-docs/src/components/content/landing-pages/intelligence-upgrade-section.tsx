@@ -103,9 +103,9 @@ export function IntelligenceUpgradeSection({
         CopilotKit Intelligence
       </h2>
       <p className="mt-3 text-[var(--text-muted)]">
-        Everything above runs on your side, and it ends when the tab closes.
-        Intelligence is the platform that keeps it, hosted by us or in your own
-        cluster.
+        Intelligence stores conversations and tool activity on the server so
+        users can resume across sessions and devices. Run it hosted by us or in
+        your own cluster.
       </p>
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2">

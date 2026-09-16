@@ -48,14 +48,14 @@ hidePageActions: true
   connect={{
     intro:
       "Your agent stays where it runs today, on LangGraph Platform or your own service. CopilotKit reaches it over AG-UI, so nothing inside the agent changes.",
-    filename: "app/api/copilotkit/route.ts",
+    filename: "app/api/copilotkit/[[...slug]]/route.ts",
     language: "ts",
     guideLink: "/deepagents/quickstart"
   }}
 >
 
-```ts title="app/api/copilotkit/route.ts"
-import { CopilotRuntime } from "@copilotkit/runtime/v2";
+```ts title="app/api/copilotkit/[[...slug]]/route.ts"
+import { CopilotRuntime, createCopilotRuntimeHandler } from "@copilotkit/runtime/v2";
 import { LangGraphAgent } from "@copilotkit/runtime/langgraph";
 
 const runtime = new CopilotRuntime({
@@ -67,6 +67,16 @@ const runtime = new CopilotRuntime({
     }),
   },
 });
+
+const handler = createCopilotRuntimeHandler({
+  runtime,
+  basePath: "/api/copilotkit",
+});
+
+export const GET = handler;
+export const POST = handler;
+export const PATCH = handler;
+export const DELETE = handler;
 ```
 
 </FrameworkOverview>

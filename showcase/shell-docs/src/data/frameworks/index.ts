@@ -15,7 +15,7 @@ import strands from "./strands";
  * gates Tier 1 on `overview && docsMode === "generated"`, so a record for an
  * `authored` slug is never read — that slug renders its
  * `integrations/<folder>/index.mdx` instead. Records for `ag2`, `agno`,
- * `crewai-crews`, `deepagents`, `llamaindex`, `mastra`, `ms-agent-dotnet` and
+ * `crewai-crews`, `deepagents`, `llamaindex`, `mastra`, `ms-agent-dotnet`, `ms-agent-python` and
  * `pydantic-ai` used to sit here unreachable, duplicating the authored MDX and
  * drifting from it. Adding one back only makes sense together with flipping
  * that slug to `generated`.
@@ -31,7 +31,7 @@ export const frameworkOverviews: Record<string, FrameworkOverviewData> = {
   "langgraph-python": {
     ...langgraphPython,
     hasAfterFeaturesMdx: true,
-    preserveCtaWithAfterFeatures: true,
+    cta: undefined,
   },
   // LangGraph variants share the same intro content (legacy /langgraph in
   // docs/ never differentiated python/typescript/fastapi at the landing

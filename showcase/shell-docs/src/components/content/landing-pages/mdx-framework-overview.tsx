@@ -1,4 +1,8 @@
 import type { ReactNode } from "react";
+import type { FrontendId } from "@/lib/frontend-options";
+import { buildAngularBackendOverview } from "@/lib/angular-backend-overview";
+import { partnerShowcaseDemos } from "@/lib/partner-showcase-demos";
+import { DocsSetupWizard } from "@/components/docs-setup-wizard";
 
 import { FrameworkOverview } from "./framework-overview";
 import type {
@@ -114,6 +118,7 @@ export interface MdxFrameworkOverviewProps {
    * MDX pipeline shortened every one of its lines by two spaces.
    */
   children?: ReactNode;
+  frontendOverride?: FrontendId;
 }
 
 export function MdxFrameworkOverview(props: MdxFrameworkOverviewProps) {
@@ -152,12 +157,28 @@ export function MdxFrameworkOverview(props: MdxFrameworkOverviewProps) {
   };
   return (
     <FrameworkOverview
-      data={synthData}
+      data={
+        props.frontendOverride === "angular"
+          ? buildAngularBackendOverview(synthData, currentFramework)
+          : synthData
+      }
       currentFramework={currentFramework}
       hrefPrefix={props.hrefPrefix}
       iconOverride={props.frameworkIcon}
-      afterFeatures={props.afterFeatures}
       connectSnippet={props.children}
+      frontendOverride={props.frontendOverride}
+      showcaseDemos={partnerShowcaseDemos(
+        currentFramework,
+        props.frontendOverride,
+      )}
+      setupContent={
+        <DocsSetupWizard
+          key={`${props.frontendOverride ?? "react"}/${currentFramework}`}
+          backend={currentFramework}
+          frontend={props.frontendOverride ?? "react"}
+        />
+      }
+      afterFeatures={props.afterFeatures}
     />
   );
 }
